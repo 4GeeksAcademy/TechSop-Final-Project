@@ -1,16 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
-import { BackendURL } from "./component/backendURL";
+import ScrollToTop from "./component/scrollToTop.jsx";
+import { BackendURL } from "./component/backendURL.jsx";
 
-import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+import Home  from "./pages/home.jsx";
+import { ProductCard } from "./component/ProductCard.jsx";
+import { Demo } from "./pages/demo.jsx";
+import { Single } from "./pages/single.jsx";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
-
+import { Navbar } from "./component/Navbar.jsx";
+import { Footer } from "./component/footer.jsx";
+import  ProductDetail  from "./component/ProductDetail.jsx";
+import {CartPage} from "./component/cart/CartPage.jsx";
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -26,6 +28,8 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                       <Route path="/products/:id" element={<ProductDetail />} />
+                        <Route path="/cart" element={<CartPage />} />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
