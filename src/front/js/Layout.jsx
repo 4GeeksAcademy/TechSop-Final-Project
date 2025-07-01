@@ -8,6 +8,7 @@ import { ProductCard } from "./component/ProductCard.jsx";
 import { Demo } from "./pages/demo.jsx";
 import { Single } from "./pages/single.jsx";
 import injectContext from "./store/appContext";
+import  AboutUs  from "./component/aboutUs.jsx";
 
 import { Navbar } from "./component/Navbar.jsx";
 import { Footer } from "./component/footer.jsx";
@@ -30,6 +31,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                        <Route path="/products/:id" element={<ProductDetail />} />
                         <Route path="/cart" element={<CartPage />} />
+                        <Route element={<AboutUs />} path="/aboutus" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
