@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
+const BACKEND_URL = "https://ubiquitous-tribble-5p4pp7qgrr7c4wvj-3001.app.github.dev";
 
 export const Auth = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true); 
-
+ 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     const endpoint = isLogin ? '/api/login' : '/api/signup';
-    const response = await fetch(endpoint, {
+    const response = await fetch(BACKEND_URL+endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
 
     if (response.ok) {
-      const { token, user } = await response.json();
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-      onLogin(user);
+      const { message, results } = await response.json();
+      localStorage.setItem('token', results.token);
+      localStorage.setItem('user', JSON.stringify(results.user));
+      onLogin(results.user);
     } else {
       alert(isLogin ? 'Error en login' : 'Error en registro');
     }

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  // Verifica que el producto tenga los datos necesarios
+  
   if (!product) return null;
 
   return (

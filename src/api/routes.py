@@ -53,18 +53,18 @@ def signup():
     response_body = {}
     data = request.json
     
-    if not data or 'email' not in data or 'password' not in data:
+    if not data or 'username' not in data or 'password' not in data:
         response_body['message'] = "Email y contraseña requeridos"
         response_body['error'] = "Bad request"
         return response_body, 400
 
-    if db.session.execute(db.select(User).where(User.email == data['email'])).scalar():
+    if db.session.execute(db.select(User).where(User.email == data['username'])).scalar():
         response_body['message'] = "El usuario ya existe"
         response_body['error'] = "Bad request"
         return response_body, 400
 
     new_user = User(
-        email=data['email'],
+        email=data['username'],
         password=data['password']
     )
     db.session.add(new_user)
@@ -218,7 +218,7 @@ def handle_user(id):
 @api.route('/cart', methods=['GET', 'POST'])
 def cart_operations():
     if request.method == 'GET':
-        # Obtener todos los items del carrito (en producción filtrar por usuario)
+    
         items = CartItem.query.all()
         return jsonify([item.serialize() for item in items]), 200
 
@@ -252,8 +252,10 @@ def cart_item_operations(item_id):
             db.session.commit()
             return jsonify(item.serialize()), 200
         
+
+@api.route('/test/', methods=['POST'])
+def test():
     
-    # Remove blueprint registration from here.
-    # Register the blueprint in your main application file (e.g., main.py or app.py) like this:
-    # from api.routes import api
-    # app.register_blueprint(api, url_prefix='/api')
+        return jsonify({"error": "test"}), 200
+
+   

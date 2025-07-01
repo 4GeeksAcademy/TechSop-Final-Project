@@ -1,4 +1,5 @@
 import React from 'react';
+const BACKEND_URL = "https://ubiquitous-tribble-5p4pp7qgrr7c4wvj-3001.app.github.dev";
 
 export const StripeCheckout = () => {
   const handlePayment = async () => {
